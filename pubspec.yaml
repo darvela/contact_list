@@ -84,6 +84,11 @@ flutter:
     - assets/img/mailgris2.png
     - assets/img/mailrojo2.png
   fonts:
-    - family: Baloo_Thambi_2
+    - family: Inria_Sans
       fonts:
-        - asset: fonts/Baloo_Thambi_2/BalooThambi2-Regular.ttf
+        - asset: fonts/Inria_Sans/InriaSans-Regular.ttf
+    - family: Lobster
+      fonts:
+        - asset: fonts/Lobster/Lobster-Regular.ttf
+
+
