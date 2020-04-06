@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:contactlist/contact_list.dart';
+import 'package:contactlist/curve_painter.dart';
 
 void main() => runApp(MyApp());
+enum WhyFarther { Settings, share, upgrade  }
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
@@ -21,7 +23,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(title: 'DESIGNERS'),
+      home: MyHomePage(title: 'Contact List'),
     );
   }
 }
@@ -46,6 +48,8 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
 
+  WhyFarther _selection;
+
   @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called, for instance as done
@@ -55,17 +59,53 @@ class _MyHomePageState extends State<MyHomePage> {
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
     return Scaffold(
-      appBar: AppBar(
+        appBar: AppBar(
+          elevation: 0.0,
+          backgroundColor: Colors.blue[800],
+          title: Text('DESIGNERS'),
+          centerTitle: true,
+          leading: PopupMenuButton<WhyFarther>(
+            icon: Icon(Icons.menu, color: Colors.white,),
+            onSelected: (WhyFarther result) { setState(() { _selection = result; }); },
+            itemBuilder: (BuildContext context) => <PopupMenuEntry<WhyFarther>>[
+              const PopupMenuItem<WhyFarther>(
+                value: WhyFarther.Settings,
+                child: Text('Settings'),
+              ),
+              const PopupMenuItem<WhyFarther>(
+                value: WhyFarther.share,
+                child: Text('Share'),
+              ),
+              const PopupMenuItem<WhyFarther>(
+                value: WhyFarther.upgrade,
+                child: Text('Upgrade'),
+              )
+            ],
+          )
+          // Here we take the value from the MyHomePage object that was created by
+          // the App.build method, and use it to set our appbar title.
+          //title: Text(widget.title),
+          //centerTitle: true,
+        ),
+
         // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
-        centerTitle: true,
-      ),
-      body: Stack(
-        children: <Widget>[
-          ContactList()
-        ],
-      )
-    );
+          // the App.build method, and use it to set our appbar title.
+          //title: Text(widget.title),
+          //centerTitle: true,
+
+        body: Stack(
+          children: <Widget>[
+            ContactList(),
+            Container(
+              width: double.infinity,
+              height: 40.0,
+              color: Colors.transparent,
+              child: CustomPaint(
+                  painter: CurvePainter()
+              ),
+            ),
+          ],
+        ));
   }
+
 }

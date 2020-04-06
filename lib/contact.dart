@@ -5,7 +5,7 @@ class Contact extends StatelessWidget {
   String name;
   String experience;
   String pathImage;
-    int hexColor;
+  int hexColor;
 
   Contact(this.name, this.experience, this.pathImage, this.hexColor);
 
