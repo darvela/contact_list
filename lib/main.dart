@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:contactlist/contact_list.dart';
 import 'package:contactlist/curve_painter.dart';
+import 'package:flutter/services.dart';
 
 void main() => runApp(MyApp());
-enum WhyFarther { Settings, share, upgrade  }
+enum MenuItems { Settings, share, upgrade  }
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
@@ -48,10 +49,15 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
 
-  WhyFarther _selection;
+  MenuItems _selection;
 
   @override
   Widget build(BuildContext context) {
+
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent, //or set color with: Color(0xFF0000FF)
+    ));
+
     // This method is rerun every time setState is called, for instance as done
     // by the _incrementCounter method above.
     //
@@ -62,22 +68,23 @@ class _MyHomePageState extends State<MyHomePage> {
         appBar: AppBar(
           elevation: 0.0,
           backgroundColor: Colors.blue[800],
+          bottomOpacity: 0.0,
           title: Text('DESIGNERS'),
           centerTitle: true,
-          leading: PopupMenuButton<WhyFarther>(
+          leading: PopupMenuButton<MenuItems>(
             icon: Icon(Icons.menu, color: Colors.white,),
-            onSelected: (WhyFarther result) { setState(() { _selection = result; }); },
-            itemBuilder: (BuildContext context) => <PopupMenuEntry<WhyFarther>>[
-              const PopupMenuItem<WhyFarther>(
-                value: WhyFarther.Settings,
+            onSelected: (MenuItems result) { setState(() { _selection = result; }); },
+            itemBuilder: (BuildContext context) => <PopupMenuEntry<MenuItems>>[
+              const PopupMenuItem<MenuItems>(
+                value: MenuItems.Settings,
                 child: Text('Settings'),
               ),
-              const PopupMenuItem<WhyFarther>(
-                value: WhyFarther.share,
+              const PopupMenuItem<MenuItems>(
+                value: MenuItems.share,
                 child: Text('Share'),
               ),
-              const PopupMenuItem<WhyFarther>(
-                value: WhyFarther.upgrade,
+              const PopupMenuItem<MenuItems>(
+                value: MenuItems.upgrade,
                 child: Text('Upgrade'),
               )
             ],

@@ -72,15 +72,26 @@ class Contact extends StatelessWidget {
       ),
     );
 
-    final mailIcon = Container(
-      margin: EdgeInsets.only(
-        right: 3.0,
-      ),
-      child: Icon(
-        Icons.mail,
-        color: Color(hexColor)
+    final mailIconTap = InkWell(
+      onTap: () {
+        Scaffold.of(context).showSnackBar(
+            SnackBar(
+                content: Text("Sendig mail...")
+            )
+        );
+      },
+      child: Container(
+        margin: EdgeInsets.only(
+            right: 3.0
+        ),
+
+        child: Icon(
+            Icons.mail,
+            color: Color(hexColor)
+        ),
       ),
     );
+
 
     final lineSeparator = Container(
       decoration: myBoxDecoration(),
@@ -92,7 +103,7 @@ class Contact extends StatelessWidget {
 
     final contactInfo = Container(
       child: Row(
-        children: <Widget>[photo, contactText, mailIcon],
+        children: <Widget>[photo, contactText, mailIconTap],
       ),
     );
 
